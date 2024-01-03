@@ -1,0 +1,15 @@
+<% if(success && success.length) {%>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= success %>
+    <!-- Difference in alpha and beta bootstrap (ver 4 vs 5) so attributes are iffy when following video-->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<% if(error && error.length) {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= error %>
+        <!-- Difference in alpha and beta bootstrap (ver 4 vs 5) so attributes are iffy when following video-->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>

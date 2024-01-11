@@ -1,5 +1,5 @@
 const { campgroundSchema, reviewSchema } = require('./schemas');
-const ExpressError = require('./utils/ExpressError');
+const expressError = require('./utils/expressError');
 const Campground = require('./models/campground');
 const Review = require('./models/review');
 
@@ -13,19 +13,19 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-// module.exports.storeReturnTo = (req, res, next) => {
-//     if (req.session.returnTo) {
-//         res.locals.returnTo = req.session.returnTo;
-//     }
-//     next();
-// }
+module.exports.storeReturnTo = (req, res, next) => {
+    if (req.session.returnTo) {
+        res.locals.returnTo = req.session.returnTo;
+    }
+    next();
+}
 
 // Validation
 module.exports.validateCampground = (req, res, next) => {
     const {error} = campgroundSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
+        throw new expressError(msg, 400)
     } else {
         next();
     }
@@ -35,7 +35,7 @@ module.exports.validateReview = (req, res, next) => {
     const {error} = reviewSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
+        throw new expressError(msg, 400)
     } else {
         next();
     }
